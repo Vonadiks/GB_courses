@@ -14,7 +14,6 @@ public class TicTacToe {
     public static Scanner scan = new Scanner(System.in);
     public static Random rand = new Random();
 
-
     public static void main(String[] args) {
         initMap();
         printMap();
@@ -41,9 +40,6 @@ public class TicTacToe {
             }
         }
         System.out.println("Игра закончена");
-
-
-
     }
 
     public static void initMap()
@@ -121,5 +117,4 @@ public class TicTacToe {
         if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
         return false;
     }
-
 }
