@@ -96,6 +96,7 @@ public class TicTacToe {
         }
         return true;
     }
+
     public static void aiTurn() {
         int x, y;
         do {
