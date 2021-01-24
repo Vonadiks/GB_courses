@@ -109,56 +109,36 @@ public class TicTacToe {
 
     public static boolean checkWin(char symb)
     {
-//        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
-//        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
-//        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
-//        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
-//        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
-//        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
-//        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
-//        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
-
-
+        boolean checkRowsCols = false;
 
 
         for (int i = 0; i < SIZE; i++)
         {
-            if(map[i][0] == symb && map[i][1] == symb && map[i][2] == symb) return true;
+            boolean checkRows = true;
+            boolean checkColumns = true;
+            for (int j = 0; j < SIZE; j++) {
+                checkRows = checkRows & (map[i][j] == symb);
+                checkColumns = checkColumns & (map[j][i] == symb);
+            }
+            if (checkRows || checkColumns)
+            {
+                checkRowsCols = true;
+                break;
+            }
 
         }
 
+        boolean checkRightDiag = true;
+        boolean checkLeftDiag = true;
         for (int i = 0; i < SIZE; i++)
         {
-            if(map[0][i] == symb && map[1][i] == symb && map[2][i] == symb) return true;
 
+            checkRightDiag = checkRightDiag & (map[i][i] == symb);
+            checkLeftDiag = checkLeftDiag & (map[i][map[i].length - 1 - i] == symb);
         }
 
-        int d1 = 0;
-        for (int i = 0; i < map.length; i++)
-        {
-            if (map[i][i] == symb)
-            {
-                d1++;
-            }
-            if (d1 == 3) return true;
 
-        }
 
-        int d2 = 0;
-        for (int i = 0; i < map.length; i++)
-        {
-
-            if (map[i][map[i].length - 1 - i] == symb)
-            {
-                d2++;
-            }
-            if (d2 == 3)
-            {
-                return true;
-            }
-
-        }
-
-        return false;
+        return (checkRowsCols || checkRightDiag || checkLeftDiag);
     }
 }
