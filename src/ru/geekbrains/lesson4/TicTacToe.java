@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
-    public static int SIZE = 3;
-    public static int DOTS_TO_WIN = 3;
+    public static int SIZE = 5;
+    public static int DOTS_TO_WIN = 4;
     public static final char DOT_EMPTY = '.';
     public static final char DOT_X = 'X';
     public static final char DOT_O = '0';
@@ -109,36 +109,44 @@ public class TicTacToe {
 
     public static boolean checkWin(char symb)
     {
+
+
+        // заполняем строку stringToWin выигрышной комбинацией,
+        // с которой будем сравнивать (например, при DOTS_TO_WIN = 4 будут строки "XXXX" или "OOOO")
+
+        String stringToWin = null;
+        for (int i = 0; i < DOTS_TO_WIN; i++) {
+            stringToWin += symb;
+        }
+
+        // ищем выигрышную комбинацию в строках и столбцах
+
         boolean checkRowsCols = false;
-
-
         for (int i = 0; i < SIZE; i++)
         {
-            boolean checkRows = true;
-            boolean checkColumns = true;
+            String tempRowsString = null;
+            String tempColsString = null;
             for (int j = 0; j < SIZE; j++) {
-                checkRows = checkRows & (map[i][j] == symb);
-                checkColumns = checkColumns & (map[j][i] == symb);
+                tempRowsString += map[i][j];
+                tempColsString += map[j][i];
             }
-            if (checkRows || checkColumns)
+            if (tempRowsString.contains(stringToWin) || tempColsString.contains(stringToWin))
             {
                 checkRowsCols = true;
                 break;
             }
-
         }
 
-        boolean checkRightDiag = true;
-        boolean checkLeftDiag = true;
+        // формируем строки из диагоналей для дальнейщего сравнения с выигрышной комбинацией
+
+        String stringRightDiag = null;
+        String stringLeftDiag = null;
         for (int i = 0; i < SIZE; i++)
         {
-
-            checkRightDiag = checkRightDiag & (map[i][i] == symb);
-            checkLeftDiag = checkLeftDiag & (map[i][map[i].length - 1 - i] == symb);
+            stringRightDiag += map[i][i];
+            stringLeftDiag += map[i][map[i].length - 1 - i];
         }
 
-
-
-        return (checkRowsCols || checkRightDiag || checkLeftDiag);
+        return (checkRowsCols || stringRightDiag.contains(stringToWin) || stringLeftDiag.contains(stringToWin));
     }
 }
