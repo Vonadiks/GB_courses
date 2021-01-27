@@ -21,12 +21,12 @@ public class Employee {
 
     void printEmployeeInfo()
     {
-        System.out.println(firstLastName + " " + position + " " + email + " " +
-                phoneNumber + " " + salary + " " + age);
+        System.out.println(firstLastName);
+        System.out.println("Position: " + position);
+        System.out.println("Email: " + email);
+        System.out.println("Phone number: " + phoneNumber);
+        System.out.println("Salary: " + salary);
+        System.out.println("Age: " + age);
+        System.out.println("==========================================");
     }
-
-
-    
-
-
 }
