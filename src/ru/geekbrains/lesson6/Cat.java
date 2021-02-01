@@ -1,0 +1,16 @@
+package ru.geekbrains.lesson6;
+
+public class Cat extends Animal
+{
+    public Cat(String name, int maxRunLimit, int maxSwimLimit)
+    {
+        super(name, maxRunLimit, maxSwimLimit);
+    }
+
+    @Override
+    public void swim(int swimLimit)
+    {
+        System.out.println("Коты не умеют плавать!");
+    }
+
+}
