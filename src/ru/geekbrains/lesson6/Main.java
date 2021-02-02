@@ -2,14 +2,24 @@ package ru.geekbrains.lesson6;
 
 public class Main {
     public static void main(String[] args) {
-        Animal animal = new Animal( "Петька",100, 150);
-        animal.run(10);
-        Cat cat1 = new Cat("Васька",200, 0);
-        cat1.swim(200);
-        cat1.run(20);
-        Dog dog1 = new Dog("Шарик", 500, 10);
-        dog1.run(200);
-        dog1.swim(9);
+
+        Animal animalBegemot = new Animal("Бегемот", 200, 300);
+        animalBegemot.swim(300);
+        animalBegemot.run(200);
+        animalBegemot.swim(400);
+        animalBegemot.run(210);
+
+        Cat catVaska = new Cat("Васька",200, 0);
+        catVaska.swim(200);
+        catVaska.swim(0);
+        catVaska.run(20);
+        catVaska.run(100);
+
+        Dog dogSharik = new Dog("Шарик", 500, 10);
+        dogSharik.run(200);
+        dogSharik.run(600);
+        dogSharik.swim(9);
+        dogSharik.swim(11);
     }
 
 }

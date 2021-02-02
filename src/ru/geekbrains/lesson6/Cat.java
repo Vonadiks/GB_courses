@@ -4,7 +4,7 @@ public class Cat extends Animal
 {
     public Cat(String name, int maxRunLimit, int maxSwimLimit)
     {
-        super(name, maxRunLimit, maxSwimLimit);
+        super(name, maxRunLimit, 0);
     }
 
     @Override
