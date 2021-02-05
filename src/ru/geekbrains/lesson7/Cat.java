@@ -11,13 +11,12 @@ public class Cat
         satiety = false;
     }
     public void eat(Plate p) {
-        if (p.getFood() >= appetite)
+        if ((p.getFood() >= appetite) && (satiety == false))
         {
             p.decreaseFood(appetite);
             satiety = true;             //добавлено состояние сытости(задание 3)
-            appetite = 0;
         }
-        else System.out.println("Еды недостаточно в тарелке, добавьте!");
+        else if (satiety == false) System.out.println("Еды недостаточно в тарелке, добавьте!");
 
     }
     public boolean getSatiety()
