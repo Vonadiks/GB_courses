@@ -13,4 +13,16 @@ public class Plate
         System.out.println("plate: " + food);
     }
 
+    public void addFood(int n) //метод добавления еды(задание 6)
+    {
+        food += n;
+    }
+
+    public int getFood()
+    {
+        return food;
+    }
+
+
+
 }
