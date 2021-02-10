@@ -8,14 +8,18 @@ import java.awt.event.ActionListener;
 public class MyWindow extends JFrame
 {
     public MyWindow() {
-        setTitle("Test Window");
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(300, 300, 400, 400);
-        setTitle("GridLayoutDemo");
+        setTitle("SimpleCalculator");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        JTextField field = new JTextField();
-        setLayout(new GridLayout(4, 3));
-        add(field);
+
+        JPanel panelText = new JPanel();
+        JTextField field = new JTextField(30);
+        panelText.add(field);
+
+        //setLayout(new BorderLayout());
+        add(panelText, BorderLayout.NORTH);
         field.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -23,13 +27,19 @@ public class MyWindow extends JFrame
             }
         });
 
+        JPanel numButtons = new JPanel();
+
         JButton[] jbs = new JButton[10];
 
         for (int i = 0; i < jbs.length; i++) {
             jbs[i] = new JButton(" " + i);
-            add(jbs[i]);
+            numButtons.add(jbs[i]);
 
         }
+
+        GridLayout layout = new GridLayout(4, 4, 12, 12);
+        numButtons.setLayout(layout);
+        add(numButtons);
 
         jbs[0].addActionListener(new ActionListener() {
             @Override
@@ -94,8 +104,18 @@ public class MyWindow extends JFrame
             }
         });
 
+
+        JButton dotButton = new JButton(".");
+        numButtons.add(dotButton);
+        dotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                field.setText(field.getText() + ".");
+            }
+        });
+
         JButton clearButton = new JButton("C");
-        add(clearButton);
+        numButtons.add(clearButton);
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +124,7 @@ public class MyWindow extends JFrame
         });
 
         JButton plusButton = new JButton("+");
-        add(plusButton);
+        numButtons.add(plusButton);
         plusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,7 +133,7 @@ public class MyWindow extends JFrame
         });
 
         JButton minusButton = new JButton("-");
-        add(minusButton);
+        numButtons.add(minusButton);
         minusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +142,7 @@ public class MyWindow extends JFrame
         });
 
         JButton multiplyButton = new JButton("*");
-        add(multiplyButton);
+        numButtons.add(multiplyButton);
         multiplyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,7 +151,7 @@ public class MyWindow extends JFrame
         });
 
         JButton divisionButton = new JButton("/");
-        add(divisionButton);
+        numButtons.add(divisionButton);
         divisionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,8 +159,9 @@ public class MyWindow extends JFrame
             }
         });
 
+
         JButton equalityButton = new JButton("=");
-        add(equalityButton);
+        add(equalityButton, BorderLayout.SOUTH);
         equalityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
