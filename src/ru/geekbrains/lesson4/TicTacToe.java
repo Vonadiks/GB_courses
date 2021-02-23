@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
-    public static int SIZE = 3;
-    public static int DOTS_TO_WIN = 3;
+    public static int SIZE = 5;
+    public static int DOTS_TO_WIN = 4;
     public static final char DOT_EMPTY = '.';
     public static final char DOT_X = 'X';
     public static final char DOT_O = '0';
@@ -13,7 +13,6 @@ public class TicTacToe {
     public static char[][] map;
     public static Scanner scan = new Scanner(System.in);
     public static Random rand = new Random();
-
 
     public static void main(String[] args) {
         initMap();
@@ -41,9 +40,6 @@ public class TicTacToe {
             }
         }
         System.out.println("Игра закончена");
-
-
-
     }
 
     public static void initMap()
@@ -100,6 +96,7 @@ public class TicTacToe {
         }
         return true;
     }
+
     public static void aiTurn() {
         int x, y;
         do {
@@ -110,16 +107,46 @@ public class TicTacToe {
         map[y][x] = DOT_O;
     }
 
-    public static boolean checkWin(char symb) {
-        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
-        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
-        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
-        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
-        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
-        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
-        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
-        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
-        return false;
-    }
+    public static boolean checkWin(char symb)
+    {
 
+
+        // заполняем строку stringToWin выигрышной комбинацией,
+        // с которой будем сравнивать (например, при DOTS_TO_WIN = 4 будут строки "XXXX" или "OOOO")
+
+        String stringToWin = null;
+        for (int i = 0; i < DOTS_TO_WIN; i++) {
+            stringToWin += symb;
+        }
+
+        // ищем выигрышную комбинацию в строках и столбцах
+
+        boolean checkRowsCols = false;
+        for (int i = 0; i < SIZE; i++)
+        {
+            String tempRowsString = null;
+            String tempColsString = null;
+            for (int j = 0; j < SIZE; j++) {
+                tempRowsString += map[i][j];
+                tempColsString += map[j][i];
+            }
+            if (tempRowsString.contains(stringToWin) || tempColsString.contains(stringToWin))
+            {
+                checkRowsCols = true;
+                break;
+            }
+        }
+
+        // формируем строки из диагоналей для дальнейщего сравнения с выигрышной комбинацией
+
+        String stringRightDiag = null;
+        String stringLeftDiag = null;
+        for (int i = 0; i < SIZE; i++)
+        {
+            stringRightDiag += map[i][i];
+            stringLeftDiag += map[i][map[i].length - 1 - i];
+        }
+
+        return (checkRowsCols || stringRightDiag.contains(stringToWin) || stringLeftDiag.contains(stringToWin));
+    }
 }
